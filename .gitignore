@@ -1,0 +1,34 @@
+# Zasebne konfiguracije in gesla (STROGO prepovedano objavljati!)
+config.ini
+smtp_credentials.ini
+smtp_settings.ini
+*.token
+*.key
+*.pem
+*.secret
+
+# Podatkovne baze in stanja
+*.db
+*.sqlite
+*.sqlite3
+dedupe.db
+
+# Dnevniki (Logs)
+*.log
+logs/
+
+# Python prevajalnik in virtualno okolje
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Urejevalniki kode in operacijski sistem
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.user

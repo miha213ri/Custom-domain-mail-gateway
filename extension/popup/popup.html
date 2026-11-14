@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Domain Mail Nastavitve</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <img src="../icons/icon48.png" alt="Afnarija Logo" class="logo">
+    <div class="header-text">
+      <h2>Custom Domain Mail</h2>
+      <span class="subtitle">Gmail SMTP Pošiljatelj</span>
+    </div>
+  </div>
+
+  <div class="card status-card">
+    <div class="status-indicator" id="statusIndicator"></div>
+    <div class="status-details">
+      <div class="status-title" id="statusTitle">Preverjanje povezave...</div>
+      <div class="status-sub" id="statusSub">gateway.tvoja-domena.si</div>
+    </div>
+  </div>
+
+  <form id="settingsForm">
+    <div class="form-group" id="tokenGroup">
+      <label for="apiToken">API žeton (X-Mail Gateway-TOKEN):</label>
+      
+      <!-- Ko je ključ že varno shranjen (skrit pred vpogledi) -->
+      <div id="tokenSavedView" class="token-saved-box" style="display: none;">
+        <div class="token-saved-status">
+          <span class="lock-icon">🔒</span>
+          <span>Ključ je varno shranjen in skrit</span>
+        </div>
+        <button type="button" id="changeTokenBtn" class="btn-text">Zamenjaj ključ</button>
+      </div>
+
+      <!-- Vnosno polje za nov/prvi ključ -->
+      <div id="tokenInputWrapper" class="password-wrapper">
+        <input type="password" id="apiToken" placeholder="Vnesite žeton iz config.ini">
+        <button type="button" id="toggleTokenBtn" class="btn-icon" title="Pokaži/skrij žeton">👁</button>
+      </div>
+      <small id="tokenHelpText">Vnesite API žeton iz datoteke <code>config.ini</code> na NeoServu.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="userEmails">Moji e-poštni naslovi (ločeni z vejico):</label>
+      <input type="text" id="userEmails" placeholder="npr. miha.ristic@tvoja-domena.si, s57nrc@tvoja-domena.si" required>
+      <small>Vpišite samo naslove, ki pripadajo temu uporabniku. Razširitev v Gmailu samodejno prepozna izbrani naslov v polju »Od«.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="gatewayUrl">Gateway URL:</label>
+      <input type="url" id="gatewayUrl" required value="https://gateway.tvoja-domena.si">
+    </div>
+
+    <button type="submit" id="saveBtn" class="btn-primary">Shrani nastavitve</button>
+    <div id="saveFeedback" class="feedback"></div>
+  </form>
+
+  <div class="footer">
+    <span>Domača pošta &bull; NeoServ SMTP &bull; v1.4.1</span>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

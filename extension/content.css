@@ -1,0 +1,109 @@
+/* Custom Domain Mail – Gmail Ločen Gumb za Pošiljanje */
+
+.afnarija-send-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 36px !important;
+  min-width: 140px !important;
+  padding: 0 16px 0 12px !important;
+  margin: 0 8px 0 12px !important;
+  background-color: #1a5e9a !important; /* Afnarija Blue */
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 18px !important;
+  font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.25px !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15) !important;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
+  user-select: none !important;
+  vertical-align: middle !important;
+  z-index: 10 !important;
+  outline: none !important;
+}
+
+.afnarija-send-btn:hover {
+  background-color: #134674 !important;
+  box-shadow: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15) !important;
+}
+
+.afnarija-send-btn:active {
+  background-color: #0e3557 !important;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3) !important;
+}
+
+.afnarija-send-btn:disabled {
+  background-color: #94a3b8 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  opacity: 0.8 !important;
+}
+
+/* Ikona znotraj gumba */
+.afnarija-btn-icon-svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
+.afnarija-btn-text {
+  white-space: nowrap !important;
+}
+
+/* Vrteči indikator (spinner) ob pošiljanju */
+.afnarija-spinner {
+  width: 16px !important;
+  height: 16px !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-top-color: #ffffff !important;
+  border-radius: 50% !important;
+  animation: afnarija-spin 0.75s linear infinite !important;
+}
+
+@keyframes afnarija-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Toast obvestila v Gmailu */
+.afnarija-toast {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 24px !important;
+  z-index: 999999 !important;
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  padding: 12px 20px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  font-family: 'Google Sans', Roboto, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  animation: afnarija-slide-in 0.25s ease-out !important;
+}
+
+.afnarija-toast.success {
+  border-left: 5px solid #10b981 !important;
+}
+
+.afnarija-toast.error {
+  border-left: 5px solid #ef4444 !important;
+}
+
+@keyframes afnarija-slide-in {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

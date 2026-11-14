@@ -1,0 +1,24 @@
+[security]
+# Skrivni 64-znakovni naključni API žeton za avtentikacijo (izdelajte z: openssl rand -hex 32)
+api_token = VNESI_SVOJ_64_ZNAKOVNI_VARNI_API_ZETON_TUKAJ
+
+[smtp]
+# Podatki vašega ponudnika poštnih storitev (cPanel / NeoServ / Postfix)
+host = mail.tvoja-domena.si
+port = 465
+use_ssl = true
+timeout = 30
+
+[imap]
+# Podatki za samodejno shranjevanje v mapo Sent (Poslano)
+host = mail.tvoja-domena.si
+port = 993
+use_ssl = true
+sent_folder = INBOX.Sent
+timeout = 30
+
+[behavior]
+# Samodejno dodajanje pošiljatelja v Bcc za povezavo v Gmail (brez Google Workspace!)
+bcc_self = true
+# Največja dovoljena velikost e-poštnega sporočila v bajtih (32 MB)
+max_body_bytes = 33554432
