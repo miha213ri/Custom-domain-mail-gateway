@@ -31,15 +31,44 @@ namespace MailGateway.Installer
         private string installDir;
         private string versionFilePath;
         private string latestVersion = "1.4.2";
-        private string downloadUrl = "https://gateway.tvoja-domena.si/prenos";
+        private string downloadUrl = "https://gateway.tvoja-domena.si/prenos/zip";
         private string localVersion = "Ni nameščeno";
 
         public MainForm()
         {
             InitializeComponent();
             SetupPaths();
+            EnsureInstalled();
             CheckCurrentLocalVersion();
             CheckServerForUpdatesAsync();
+        }
+
+        private void EnsureInstalled()
+        {
+            try
+            {
+                if (Directory.Exists(installDir) && File.Exists(Path.Combine(installDir, "manifest.json")))
+                    return;
+
+                Directory.CreateDirectory(installDir);
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("extension.zip"))
+                {
+                    if (stream != null)
+                    {
+                        string tempZip = Path.Combine(Path.GetTempPath(), "mail_gateway_temp_" + Guid.NewGuid().ToString("N") + ".zip");
+                        using (FileStream fs = new FileStream(tempZip, FileMode.Create, FileAccess.Write))
+                        {
+                            stream.CopyTo(fs);
+                        }
+                        ZipFile.ExtractToDirectory(tempZip, installDir);
+                        try { File.Delete(tempZip); } catch { }
+                    }
+                }
+                File.WriteAllText(versionFilePath, latestVersion);
+                localVersion = latestVersion;
+            }
+            catch { }
         }
 
         private void SetupPaths()
@@ -235,10 +264,13 @@ namespace MailGateway.Installer
         {
             try
             {
-                // Če razširitev obstaja, pot samodejno kopiraj v odložišče za lažje lepljenje
+                EnsureInstalled();
+
                 if (Directory.Exists(installDir))
                 {
                     Clipboard.SetText(installDir);
+                    // Odpri mapo z razširitvijo v Raziskovalcu
+                    Process.Start("explorer.exe", installDir);
                 }
 
                 string exePath = FindBrowserExecutable(exeName);
@@ -250,6 +282,17 @@ namespace MailGateway.Installer
                 {
                     Process.Start(url);
                 }
+
+                MessageBox.Show(
+                    "Google Chrome in drugi brskalniki zaradi varnosti NE DOVOLIJO, da bi zunanji program v ozadju samodejno namestil razširitev brez vaše potrditve.\n\n" +
+                    "Zato sledite tema 2 korakoma:\n\n" +
+                    "1. V Chromu zgoraj desno vklopite stikalo: [ Razvijalski način ] (Developer mode)\n\n" +
+                    "2. Mapo, ki se je pravkar odprla na ekranu, z miško PREVLECITE v okno Chroma (Drag & Drop)!\n" +
+                    "   (ali kliknite 'Naloži razpakirano' in vnesite pot iz odložišča: Ctrl+V)",
+                    "Namestitev v Chromu",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
             catch (Exception ex)
             {

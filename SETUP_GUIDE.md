@@ -59,7 +59,7 @@ To ensure maximum email deliverability and avoid landing in recipient Spam/Junk 
 1. Open your browser (Brave, Chrome, Edge, Opera GX).
 2. Navigate to `chrome://extensions/` (or `brave://extensions/`).
 3. Enable **Developer mode** in the top right corner.
-4. Click **Load unpacked** and select the `extension/` folder.
+4. Click **Load unpacked** and select the `extension/` folder (or simply **drag and drop** the `extension/` folder into the Chrome extensions window).
 5. Click the extension icon in your browser toolbar:
    - **Gateway URL:** `https://gateway.yourdomain.com`
    - **API Token:** your secret token from `config.ini`

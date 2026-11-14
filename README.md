@@ -73,7 +73,7 @@
 ### 2. Browser Extension Setup (Chrome, Brave, Edge, Opera GX)
 1. Open `chrome://extensions/` (or `brave://extensions/`).
 2. Toggle on **Developer mode** in the top right corner.
-3. Click **Load unpacked** and select the `extension/` folder.
+3. Click **Load unpacked** and select the `extension/` folder (or simply **drag and drop** the `extension/` folder directly into the browser window).
 4. Click the extension toolbar icon and enter your **Gateway URL** and **API Token**.
 5. Reload Gmail (`F5`), compose an email, choose your custom domain in the **From** dropdown, and click **[ ✉️ Send from Custom Domain ]**!
 
